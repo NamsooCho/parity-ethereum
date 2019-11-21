@@ -73,5 +73,6 @@ mod discovery;
 mod service;
 mod node_table;
 mod ip_utils;
+mod fork_id;
 
 const PROTOCOL_VERSION: u32 = 5;
