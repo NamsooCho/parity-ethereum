@@ -19,12 +19,14 @@ use common_types::{
     BlockNumber,
     engines::params::CommonParams
 };
+use log::error;
 use crc::crc32;
 use ethereum_types::H256;
 use machine::Machine;
 use blockchain::BlockChain;
 
 /// A fork identifier as defined by EIP-2124.
+#[derive(Debug)]
 pub struct ID {
     hash: u32,          // CRC32 checksum of the all fork blocks from genesis.
     next: BlockNumber   // Next upcoming fork block number, 0 if not yet known.
@@ -131,7 +133,9 @@ impl Filter {
                 // No exact, subset or superset match. We are on differing chains, reject.
                 return Err(Error::new(ErrorKind::Other, ""))
             }).collect::<Vec<_>>();
-        Ok(())
+
+        error!(target: "network", "Impossible fork ID validation error: id = {:?}.", id);
+        Ok(()) // Something is wrong, accept rather than reject.
     }
 
     // Calculates the next IEEE CRC32 checksum based on the formula of CRC32(original-blob || fork).
