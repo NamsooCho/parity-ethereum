@@ -147,6 +147,8 @@ malloc_size_of_is_0!(PeerInfo);
 
 pub type PacketDecodeError = DecoderError;
 
+/// 64 version of Ethereum protocol.
+pub const ETH_PROTOCOL_VERSION_64: (u8, u8) = (64, 0x11);
 /// 63 version of Ethereum protocol.
 pub const ETH_PROTOCOL_VERSION_63: (u8, u8) = (63, 0x11);
 /// 62 version of Ethereum protocol.
