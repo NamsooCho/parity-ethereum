@@ -32,6 +32,36 @@ pub struct ID {
     next: BlockNumber   // Next upcoming fork block number, 0 if not yet known.
 }
 
+impl ID {
+    /// Calculates the Ethereum fork ID from the chain_info.
+    pub fn new(chain: &BlockChain) -> Self {
+        ID::new_inner(
+            chain.chain_info().genesis_hash,
+            chain.chain_info().best_block_number
+        )
+    }
+
+    // Use *_inner to allow testing the IDs without
+    // having to simulate an entire blockchain.
+    fn new_inner(genesis: H256, head: BlockNumber) -> Self {
+        let mut hash = crc32::checksum_ieee(genesis[..]);
+        let mut next= 0;
+        let forks = Filter::get_forks_history(params);
+        let _: Vec<_> = forks.into_iter()
+            .filter(|fork| *fork <= head)
+            .map(|fork| {
+                hash = Filter::update_checksum(hash, &fork);
+                next = fork;
+            })
+            .collect();
+
+        ID {
+            hash,
+            next
+        }
+    }
+}
+
 /// A filter that returns if a fork ID should be rejected or not
 /// based on the local chain's status.
 pub struct Filter {
