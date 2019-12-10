@@ -17,7 +17,7 @@
 use crate::fork_id::ID;
 use blockchain::BlockChain;
 
-/// EthEntry is the "eth" ENR entry for advertising eth protocol on the discovery network.
+/// EthEntry is the "eth" db entry for advertising eth protocol on the discovery network.
 pub struct EthEntry {
     fork_id: ID,    // Fork identifier defined in EIP-2124
     rest: String    // For forward compatibility ignore additional fields

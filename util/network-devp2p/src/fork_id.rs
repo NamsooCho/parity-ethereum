@@ -37,7 +37,7 @@ impl ID {
     pub fn new(chain: &BlockChain) -> Self {
         ID::new_inner(
             chain.chain_info().genesis_hash,
-            chain.chain_info().best_block_number
+            chain.best_block_number()
         )
     }
 

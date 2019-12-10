@@ -74,6 +74,6 @@ mod service;
 mod node_table;
 mod ip_utils;
 mod fork_id;
-mod enr_entry;
+mod eth_entry;
 
 const PROTOCOL_VERSION: u32 = 5;
