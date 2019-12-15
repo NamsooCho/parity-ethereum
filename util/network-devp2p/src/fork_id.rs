@@ -62,6 +62,15 @@ impl ID {
     }
 }
 
+/// Update to latest fork id
+pub struct ForkId {
+
+}
+
+impl ForkId {
+
+}
+
 /// A filter that returns if a fork ID should be rejected or not
 /// based on the local chain's status.
 pub struct Filter {
