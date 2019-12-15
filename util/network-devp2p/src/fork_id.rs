@@ -68,7 +68,14 @@ pub struct ForkId {
 }
 
 impl ForkId {
+    pub fn new() -> Self {
+        ForkId{}
+    }
 
+    pub fn subscribe_header() {
+        EthPubSubClient::new(Arc::new(fetch), executor, pool_receiver)
+
+    }
 }
 
 /// A filter that returns if a fork ID should be rejected or not
